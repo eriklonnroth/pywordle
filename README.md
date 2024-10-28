@@ -7,7 +7,7 @@ Sidenote: This is my first ever Python project, built in 60 minutes with the hel
 ## Installation
 
 1. Ensure you have Python 3.x installed
-2. Clone the repo and install required dependencies:
+2. Clone the repo, `cd` into the project and install required dependencies:
 ```bash
 pip install -r requirements.txt
 ```
@@ -27,14 +27,18 @@ First, get pyinstaller:
 pip install pyinstaller
 ```
 
-*Option 1: Install the app without an icon*
-This will generate an app bundle with the standard black executable icon
+### Option 1: Install the app without an icon
+
+This will generate an app bundle with the standard black executable icon.
 ```bash
 pyinstaller --onefile --add-data "words.csv:." --windowed pywordle.py
 ```
 
-*Option 2: Install the app with an icon*
-`cd` into the project folder and run the following commands to generate an app icon:
+### Option 2: Install the app with an icon
+
+This will set icon.png as the app icon.
+
+`cd` into the project folder, then run the following commands to generate a MacOS icon set:
 ```bash
 mkdir icon.iconset
 sips -z 16 16     icon.png --out icon.iconset/icon_16x16.png
@@ -135,7 +139,6 @@ pywordle/
 
 - Python 3.x
 - Pygame
-- CSV module (standard library)
 
 ## Contributing
 
