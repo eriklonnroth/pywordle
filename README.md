@@ -30,14 +30,16 @@ python pywordle.py
 ## Technical Details
 
 ### Word Selection
+Kudos to https://github.com/steve-kasica/wordle-words/blob/master/wordle.csv for providing the original Wordle wordlist.
 The game uses a curated list of words from `words.csv` with two columns:
 - `word`: The five-letter word
-- `occurrence`: A float value representing the word's frequency in English. Adapted from https://github.com/steve-kasica/wordle-words/blob/master/wordle.csv
+- `occurrence`: A float value representing the word's frequency among printed works in English. 
 
 For a word to qualify as a potential target word, it must meet a minimum occurrence threshold. At 1E-7, words like 'allot' and 'allow' make the cut, but obscure words like 'almug' and 'alods' do not. You can adjust the OCCURRENCE_THRESHOLD constant at the top of the file:
 ```python
-    OCCURRENCE_THRESHOLD = 1E-7 # Use 1E-6 to only use common English words
+    OCCURRENCE_THRESHOLD = 1E-7 # Use 1E-6 to only include common English words
 ```
+The occurrence threshold only affects the selection of target words, and has no impact on words that will be accepted as guesses. 
 
 ### Core Functions
 
