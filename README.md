@@ -2,20 +2,31 @@
 
 A Python implementation of the popular word-guessing game Wordle using Pygame. Players get six attempts to guess a five-letter word, with color-coded feedback for each guess.
 
-Sidenote: This is my firsrt ever Python project, built in 60 minutes with the help of Claude.ai!
+Sidenote: This is my first ever Python project, built in 60 minutes with the help of Claude.ai!
+
+## Latest Release
+
+Download the latest release 
 
 ## Installation
 
 1. Ensure you have Python 3.x installed
 2. Install required dependencies:
 ```bash
-pip install pygame
+pip install -r requirements.txt
 ```
 
-3. Place `words.csv` in the same directory as `pywordle.py`
+3. Ensure `words.csv` in the same directory as `pywordle.py`
 4. Run the game:
 ```bash
 python pywordle.py
+```
+
+## Executable
+
+Instead of launching the game from the command line, you can create an executable file:
+```bash
+pyinstaller --onefile --add-data "words.csv:." --windowed pywordle.py
 ```
 
 ## How to Play

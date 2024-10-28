@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.class
+
+# PyInstaller
+dist/
+build/
+*.spec
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Generated icons
+*.icns
+*.ico
+
+# Thumbnails
+._*
