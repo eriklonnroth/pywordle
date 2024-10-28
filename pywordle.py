@@ -1,4 +1,5 @@
 import pygame
+import os
 import csv
 import random
 import time
@@ -154,9 +155,14 @@ class WordleGame:
         # print(f"Target word: {self.target_word}") # Uncomment for troubleshooting
         
     def load_valid_words(self) -> set:
+
+        # Get the directory where the current script is located
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        csv_path = os.path.join(script_dir, "words.csv")
+
         valid_words = set()
         try:
-            with open('words.csv', 'r') as file:
+            with open(csv_path, 'r') as file:
                 reader = csv.DictReader(file)
                 for row in reader:
                     try:
