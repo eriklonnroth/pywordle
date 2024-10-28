@@ -4,30 +4,57 @@ A Python implementation of the popular word-guessing game Wordle using Pygame. P
 
 Sidenote: This is my first ever Python project, built in 60 minutes with the help of Claude.ai!
 
-## Latest Release
-
-Download the latest release 
-
 ## Installation
 
 1. Ensure you have Python 3.x installed
-2. Install required dependencies:
+2. Clone the repo and install required dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Ensure `words.csv` in the same directory as `pywordle.py`
-4. Run the game:
+3. Ensure `words.csv` is in the same directory as `pywordle.py`
+4. Launch the game (takes a few seconds to load):
 ```bash
 python pywordle.py
 ```
 
-## Executable
+## Build app bundle
 
-Instead of launching the game from the command line, you can create an executable file:
+Instead of launching the game from the command line, you can create an app bundle (i.e. click to open).
+
+First, get pyinstaller:
+```bash
+pip install pyinstaller
+```
+
+*Option 1: Install the app without an icon*
+This will generate an app bundle with the standard black executable icon
 ```bash
 pyinstaller --onefile --add-data "words.csv:." --windowed pywordle.py
 ```
+
+*Option 2: Install the app with an icon*
+`cd` into the project folder and run the following commands to generate an app icon:
+```bash
+mkdir icon.iconset
+sips -z 16 16     icon.png --out icon.iconset/icon_16x16.png
+sips -z 32 32     icon.png --out icon.iconset/icon_16x16@2x.png
+sips -z 32 32     icon.png --out icon.iconset/icon_32x32.png
+sips -z 64 64     icon.png --out icon.iconset/icon_32x32@2x.png
+sips -z 128 128   icon.png --out icon.iconset/icon_128x128.png
+sips -z 256 256   icon.png --out icon.iconset/icon_128x128@2x.png
+sips -z 256 256   icon.png --out icon.iconset/icon_256x256.png
+sips -z 512 512   icon.png --out icon.iconset/icon_256x256@2x.png
+sips -z 512 512   icon.png --out icon.iconset/icon_512x512.png
+sips -z 1024 1024 icon.png --out icon.iconset/icon_512x512@2x.png
+iconutil -c icns icon.iconset -o PyWordle.icns
+```
+
+Once you have generated the `PyWordle.icns` icon set, you can install the app bundle: 
+```bash
+pyinstaller --onefile --add-data "words.csv:." --windowed --icon=PyWordle.icns --name "PyWordle" pywordle.py
+```
+
 
 ## How to Play
 
