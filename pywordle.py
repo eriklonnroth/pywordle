@@ -151,7 +151,7 @@ class WordleGame:
         self.target_word = self.get_random_word()
         self.jiggle_start = None
         self.current_animation = None
-        print(f"Target word: {self.target_word}")
+        # print(f"Target word: {self.target_word}") # Uncomment for troubleshooting
         
     def load_valid_words(self) -> set:
         valid_words = set()
