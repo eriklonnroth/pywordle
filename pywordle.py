@@ -10,8 +10,10 @@ from typing import List, Tuple
 # Initialize Pygame
 pygame.init()
 
-# Obscure words exclusion
-OCCURRENCE_THRESHOLD = 1e-7  # Use 1E-6 to only use common English words
+# Exclude obscure words. 
+# Recommended level for native English speaking adults: 1e-6 (threshold includes uncommon words like "chute", "rebut" and "thyme").
+# Recommended level for non-native English speakers and kids: 1e-5 (includes only common words like "donor", "radar", and "uncle").
+OCCURRENCE_THRESHOLD = 1e-6
 
 # Constants
 WINDOW_SIZE = 720
@@ -176,7 +178,7 @@ class WordleGame:
                 reader = csv.DictReader(file)
                 for row in reader:
                     try:
-                        if float(row["occurrence"]) >= 1e-7:
+                        if float(row["occurrence"]) >= OCCURRENCE_THRESHOLD:
                             valid_words.add(row["word"].upper())
                     except (ValueError, KeyError):
                         continue
@@ -198,18 +200,20 @@ class WordleGame:
     def is_valid_word(self, word: str) -> bool:
         return word.upper() in self.valid_words
 
-    def check_guess(self, guess: str) -> List[Tuple[str, str]]:
+    def check_guess(self, guess: str) -> List[Tuple[str, str]]: # Returns a list of tuples, each corresponding to a letter in the guessed word and its state, denoting its match within the target word, i.e. "correct", "absent" or "present"
         result = [(letter, None) for letter in guess]
         target_chars = list(self.target_word)
         guess_chars = list(guess)
         used_positions = set()
 
+        # Pass 1: identify any correct letters (green)
         for i in range(len(guess_chars)):
             if guess_chars[i] == target_chars[i]:
                 result[i] = (guess_chars[i], "correct")
-                target_chars[i] = None
+                target_chars[i] = None # Remove the green letter from the target word to aovid double counting on subsequent passes
                 used_positions.add(i)
 
+        # Pass 2: identify any present letters (yellow)
         for i in range(len(guess_chars)):
             if i in used_positions:
                 continue
@@ -217,7 +221,9 @@ class WordleGame:
             letter = guess_chars[i]
             if letter in target_chars:
                 result[i] = (letter, "present")
-                target_chars[target_chars.index(letter)] = None
+                target_chars[target_chars.index(letter)] = None # Remove the yellow letter from the target word to aovid double counting on subsequent passes
+            
+            # Pass 3: identify any absent letters (gray)
             else:
                 result[i] = (letter, "absent")
 
