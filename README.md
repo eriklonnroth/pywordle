@@ -130,9 +130,12 @@ The game uses two main classes for animations:
 ```
 pywordle/
 │
+├── icon.png         # For creating executable
+├── LICENSE          # MIT License
 ├── pywordle.py      # Main game file
 ├── words.csv        # Word list with occurrence rates
-└── README.md        # This file
+├── README.md        # This file
+└── requirements.txt # Requirements (pygame)
 ```
 
 ## Dependencies
